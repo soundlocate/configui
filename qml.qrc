@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Status.qml</file>
+        <file>Config.qml</file>
+        <file>SoundReduce.qml</file>
+        <file>SoundLocate.qml</file>
+        <file>SoundFFT.qml</file>
+        <file>SoundInput.qml</file>
+        <file>SoundSimulate.qml</file>
+        <file>General.qml</file>
+        <file>Log.qml</file>
+        <file>Connections.qml</file>
+        <file>Output.qml</file>
+        <file>websocketFunctions.js</file>
+        <file>urlParse.js</file>
+        <file>three.min.js</file>
+        <file>style.css</file>
+        <file>orbiControls.js</file>
+        <file>notMyThree.js</file>
+        <file>myThree.js</file>
+        <file>main.js</file>
+        <file>lut.js</file>
+        <file>index.html</file>
+        <file>HsvToRgb.js</file>
+        <file>error.png</file>
+        <file>SoftwareRenderer.js</file>
+    </qresource>
+</RCC>
