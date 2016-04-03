@@ -12,6 +12,7 @@ Item {
         nameFilters: [ "Audio files (*.wav)" ]
 
         onAccepted: {
+            config.soundFile = fileUrl
             var path = fileUrl.toString()
             path = path.replace(/^(file:\/{3})/,"/")
             var cleanPath = decodeURIComponent(path)
@@ -42,7 +43,7 @@ Item {
                     width: 300
                     anchors.verticalCenter: parent.verticalCenter
                     readOnly: true
-                    text: "sin.wav"
+                    text: config.soundFile.toString()
                     placeholderText: qsTr("filename")
                 }
 

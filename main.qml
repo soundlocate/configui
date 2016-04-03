@@ -1,12 +1,18 @@
 import QtQuick 2.6
 import QtQuick.Controls 1.5
 import QtQuick.Dialogs 1.2
+//import de.sfn_kassel.locate 1.0
 
 ApplicationWindow {
     visible: true
     width: 640
     height: 480
     title: qsTr("soundLocate")
+/*
+    Config {
+        id: config
+    }
+*/
 
     TabView {
         id: tabView1
@@ -74,13 +80,4 @@ ApplicationWindow {
         anchors.right: parent.right
         anchors.rightMargin: 0
     }
-
-
-
-
-
-
-
-
-
 }

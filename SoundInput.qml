@@ -26,8 +26,12 @@ Item {
 
                 TextField {
                     id: textAudioDeviceName
-                    text: "pulse"
+                    text: config.audioDeviceName
                     placeholderText: qsTr("device name")
+
+                    Component.onCompleted: {
+                        config.audioDeviceName = Qt.binding(function() {return text})
+                    }
                 }
             }
         }

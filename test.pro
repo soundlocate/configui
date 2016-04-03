@@ -2,9 +2,12 @@ TEMPLATE = app
 
 QT += qml quick widgets webengine
 
-CONFIG += c++11
+CONFIG += gnu++14
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    config.cpp \
+    micmodel.cpp \
+    mic.cpp
 
 RESOURCES += qml.qrc
 
@@ -15,3 +18,11 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 DISTFILES +=
+
+HEADERS += \
+    config.h \
+    micmodel.h \
+    mic.h \
+    cpptoml.h
+
+CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT

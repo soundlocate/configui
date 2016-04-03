@@ -27,9 +27,13 @@ Item {
 
             TextField {
                 id: textFieldSamplerate
-                text: "192000"
+                text: config.fftSize
                 placeholderText: qsTr("fftsize")
                 validator: IntValidator{bottom: 1; top: 19200000;}
+
+                Component.onCompleted: {
+                    config.fftSize = Qt.binding(function() {return Number(parseFloat(text)) > 1 ? Number(parseFloat(text)) : Number(1)})
+                }
             }
 
             Label {
@@ -41,7 +45,12 @@ Item {
             ComboBox {
                 id: comboBox1
                 width: 200
-                model: [ "Hamming window", "Hanning window", "Rectangle window"]
+                currentIndex: config.fftFunction
+                model: [ "Hamming window", "Hanning window", "Rectangle window" ]
+
+                Component.onCompleted: {
+                    config.fftFunction = Qt.binding(function() { return currentIndex })
+                }
             }
 
             Label {
@@ -52,11 +61,15 @@ Item {
 
             TextField {
                 id: textFieldSamplerate1
-                text: "10"
+                text: config.fftPerSec
                 placeholderText: qsTr("fftPerSec")
                 validator: IntValidator {
                     bottom: 1
-                    top: 19200000
+                    top: 100
+                }
+
+                Component.onCompleted: {
+                    config.fftPerSec = Qt.binding(function() {return Number(parseInt(text)) > 1 ? Number(parseInt(text)) : Number(1)})
                 }
             }
         }

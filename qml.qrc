@@ -25,5 +25,6 @@
         <file>HsvToRgb.js</file>
         <file>error.png</file>
         <file>SoftwareRenderer.js</file>
+        <file>Projector.js</file>
     </qresource>
 </RCC>

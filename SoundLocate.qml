@@ -26,19 +26,33 @@ Item {
                 CheckBox {
                     id: checkBoxPOnly
                     text: qsTr("PhaseOnly")
-                    checked: true
+                    checked: config.algoPhase
+
+                    Component.onCompleted: {
+                        config.algoPhase = Qt.binding(function() {return checked})
+                    }
                 }
 
                 CheckBox {
                     id: checkBoxPandV
                     text: qsTr("PhaseAndVelocity")
+                    checked: config.algoPaV
+
+                    Component.onCompleted: {
+                        config.algoPaV = Qt.binding(function() {return checked})
+                    }
                 }
 
                 CheckBox {
                     id: checkBoxPandA
                     text: qsTr("PhaseAndAmplitude")
-                }
+                    checked: config.algoPaA
 
+                    Component.onCompleted: {
+                        config.algoPaA = Qt.binding(function() {return checked})
+                    }
+
+                }
             }
         }
 
@@ -59,11 +73,15 @@ Item {
 
                 TextField {
                     id: textFieldAccuracy
-                    text: qsTr("0.01")
+                    text: config.accuracy
                     placeholderText: qsTr("accuracy")
                     validator: DoubleValidator {
                         bottom: 0
                         top: 100
+                    }
+
+                    Component.onCompleted: {
+                        config.accuracy = Qt.binding(function() {return Number(parseFloat(text)) > 0 ? Number(parseFloat(text)) : 0})
                     }
                 }
             }

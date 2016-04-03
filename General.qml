@@ -1,7 +1,7 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
-
+import QtQuick.Controls.Styles 1.4
 
 Item {
     id: item1
@@ -21,6 +21,11 @@ Item {
             CheckBox {
                 id: checkBoxReal
                 text: qsTr("  real")
+                checked: config.real
+
+                Component.onCompleted: {
+                    config.real = Qt.binding(function() { return checked})
+                }
 
                 onCheckedChanged: {
                     if(checked) {
@@ -43,13 +48,22 @@ Item {
                     text: qsTr("  create logfile")
                     anchors.verticalCenter: parent.verticalCenter
                     onCheckedChanged: textFieldLogName.visible = checked
+                    checked: config.log
+
+                    Component.onCompleted: {
+                        config.log = Qt.binding(function() { return checked})
+                    }
                 }
 
                 TextField {
                     id: textFieldLogName
                     visible: false
-                    text: "log.csv"
+                    text: config.logFilename
                     placeholderText: qsTr("logfilename")
+
+                    Component.onCompleted: {
+                        config.logFilename = Qt.binding(function() {return text})
+                    }
                 }
             }
 
@@ -69,9 +83,13 @@ Item {
 
                 TextField {
                     id: textFieldSamplerate
-                    text: "192000"
+                    text: config.samplerate
                     placeholderText: qsTr("samplerate")
                     validator: IntValidator{bottom: 0; top: 19200000;}
+
+                    Component.onCompleted: {
+                        config.samplerate = Qt.binding(function() {return Number(parseFloat(text)) > 1 ? Number(parseFloat(text)) : Number(1)})
+                    }
                 }
             }
         }
@@ -106,8 +124,14 @@ Item {
 
                 itemDelegate: TextInput {
                     text: styleData.value
-                    validator: DoubleValidator{bottom: 0; top: 100;}
-                    onEditingFinished: micModel.setProperty(styleData.row, styleData.role, Number(parseFloat(text)))
+                    validator: DoubleValidator{bottom: 0; top: 10000000000;}
+
+                    onEditingFinished: {
+                        var a = styleData.row
+                        var b = styleData.role
+                        micModel.setOwnData(a, text, b)
+                        text = micModel.ownData(a, b)
+                    }
                 }
 
                 TableViewColumn {
@@ -137,20 +161,20 @@ Item {
                 Button {
                     id: buttonAddMic
                     text: qsTr("add")
-                    onClicked: micModel.append({x: 0.0, y: 0.0, z: 0.0})
+                    onClicked: micModel.append()
                 }
 
                 Button {
                     id: buttonRemoveMic
                     text: qsTr("remove")
-                    onClicked: micModel.remove(micModel.rowCount() - 1)
+                    onClicked: micModel.remove()
                 }
             }
 
         }
     }
 
-
+/*
     ListModel {
         id: micModel
         ListElement {
@@ -193,5 +217,10 @@ Item {
             y: 1.0
             z: 1.0
         }
+
+        onDataChanged: {
+
+        }
     }
+    */
 }

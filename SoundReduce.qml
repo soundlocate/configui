@@ -25,11 +25,15 @@ Item {
 
             TextField {
                 id: textFieldMaxClusterSize
-                text: qsTr("0.5")
+                text: config.maxClusterSize
                 placeholderText: qsTr("maximum size")
                 validator: DoubleValidator {
                     bottom: 0
                     top: 100
+                }
+
+                Component.onCompleted: {
+                    config.maxClusterSize = Qt.binding(function() {return Number(parseFloat(text)) > 0 ? Number(parseFloat(text)) : 0})
                 }
             }
 
@@ -40,11 +44,15 @@ Item {
 
             TextField {
                 id: textFieldMaxKeep
-                text: qsTr("10")
+                text: config.maxKeep
                 placeholderText: qsTr("maximum keep points")
                 validator: IntValidator {
                     bottom: 0
                     top: 10000000
+                }
+
+                Component.onCompleted: {
+                    config.maxKeep = Qt.binding(function() {return Number(parseInt(text)) >= 0 ? Number(parseInt(text)) : 0})
                 }
             }
 
@@ -55,11 +63,15 @@ Item {
 
             TextField {
                 id: textFieldMeanWindow
-                text: qsTr("3")
+                text: config.meanWindow
                 placeholderText: qsTr("size of window")
                 validator: IntValidator {
                     bottom: 0
                     top: 10000000
+                }
+
+                Component.onCompleted: {
+                    config.meanWindow = Qt.binding(function() {return Number(parseInt(text)) >= 0 ? Number(parseInt(text)) : 0})
                 }
             }
 
@@ -70,11 +82,15 @@ Item {
 
             TextField {
                 id: textFieldKeepTime
-                text: qsTr("0.5")
+                text: config.keepTime
                 placeholderText: qsTr("time")
                 validator: DoubleValidator {
                     bottom: 0
                     top: 10000000
+                }
+
+                Component.onCompleted: {
+                    config.keepTime = Qt.binding(function() {return Number(parseFloat(text)) >= 0 ? Number(parseFloat(text)) : 0})
                 }
             }
         }
