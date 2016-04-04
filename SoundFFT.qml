@@ -72,6 +72,26 @@ Item {
                     config.fftPerSec = Qt.binding(function() {return Number(parseInt(text)) > 1 ? Number(parseInt(text)) : Number(1)})
                 }
             }
+
+            Label {
+                id: textFFTthreshold
+                text: qsTr("FFT filter threshold")
+                font.pixelSize: 12
+            }
+
+            TextField {
+                id: textFieldThreshold
+                text: config.fftThreshold
+                placeholderText: qsTr("fftPerSec")
+                validator: DoubleValidator {
+                    bottom: 0
+                    top: 1000000
+                }
+
+                Component.onCompleted: {
+                    config.fftThreshold = Qt.binding(function() {return Number(parseFloat(text)) > 0 ? Number(parseFloat(text)) : Number(0.01)})
+                }
+            }
         }
     }
 }

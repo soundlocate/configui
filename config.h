@@ -33,6 +33,7 @@ public:
     Q_PROPERTY(int maxKeep MEMBER m_maxKeep NOTIFY configChanged)
     Q_PROPERTY(int meanWindow MEMBER m_meanWindow NOTIFY configChanged)
     Q_PROPERTY(qreal keepTime MEMBER m_keepTime NOTIFY configChanged)
+    Q_PROPERTY(qreal fftThreshold MEMBER m_fftThres NOTIFY configChanged)
 
     void writeConfig();
     void readConfig();
@@ -76,6 +77,7 @@ private:
     int m_maxKeep;
     int m_meanWindow;
     qreal m_keepTime;
+    qreal m_fftThres;
 };
 
 #endif // CONFIG_H

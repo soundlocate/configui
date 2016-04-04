@@ -21,6 +21,7 @@ void Config::writeConfig() {
 	table->erase("soundFFT.fftSize");
 	table->erase("soundFFT.windowingFunktion");
 	table->erase("soundFFT.fftPerSec");
+    table->erase("soundFFT.threshold");
 	table->erase("soundLocate.algorithms");
 	table->erase("soundLocate.accuracy");
 	table->erase("soundReduce.maxClusterSize");
@@ -76,6 +77,7 @@ void Config::writeConfig() {
 	}
 
     soundFFT->insert("fftPerSec", (long) m_fftPerSec);
+    soundFFT->insert("threshold", m_fftThres);
 	table->insert("soundFFT", soundFFT);
 
 	auto soundLocate = cpptoml::make_table();
@@ -142,6 +144,7 @@ void Config::readConfig() {
         m_fftFunction = 2;
 
     m_fftPerSec = *table->get_qualified_as<int64_t>("soundFFT.fftPerSec");
+    m_fftThres = *table->get_qualified_as<double>("soundFFT.threshold");
 
     s = *table->get_qualified_as<std::string>("soundLocate.algorithms");
     t = QString(s.c_str());

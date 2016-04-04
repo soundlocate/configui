@@ -7,7 +7,9 @@ CONFIG += gnu++14
 SOURCES += main.cpp \
     config.cpp \
     micmodel.cpp \
-    mic.cpp
+    mic.cpp \
+    controller.cpp \
+    logtext.cpp
 
 RESOURCES += qml.qrc
 
@@ -23,6 +25,8 @@ HEADERS += \
     config.h \
     micmodel.h \
     mic.h \
-    cpptoml.h
+    cpptoml.h \
+    controller.h \
+    logtext.h
 
 CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT

@@ -124,7 +124,7 @@ Item {
 
                 itemDelegate: TextInput {
                     text: styleData.value
-                    validator: DoubleValidator{bottom: 0; top: 10000000000;}
+                    validator: DoubleValidator{bottom: 0; top: 1000000000;}
 
                     onEditingFinished: {
                         var a = styleData.row
@@ -167,7 +167,10 @@ Item {
                 Button {
                     id: buttonRemoveMic
                     text: qsTr("remove")
-                    onClicked: micModel.remove()
+                    onClicked: {
+                        forceActiveFocus()
+                        micModel.remove()
+                    }
                 }
             }
 
