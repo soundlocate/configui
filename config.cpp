@@ -19,9 +19,9 @@ void Config::writeConfig() {
 	table->erase("soundInput.deviceName");
 	table->erase("soundSimulate.soundFile");
 	table->erase("soundFFT.fftSize");
-	table->erase("soundFFT.windowingFunktion");
+	table->erase("soundFFT.windowingFunction");
 	table->erase("soundFFT.fftPerSec");
-    table->erase("soundFFT.threshold");
+  table->erase("soundFFT.threshold");
 	table->erase("soundLocate.algorithms");
 	table->erase("soundLocate.accuracy");
 	table->erase("soundReduce.maxClusterSize");
@@ -60,19 +60,19 @@ void Config::writeConfig() {
 
 	switch (m_fftFunction) {
 	case 0: {
-		soundFFT->insert("windowingFunktion", "hamm");
+		soundFFT->insert("windowingFunction", "hamm");
 		break;
 	}
 	case 1: {
-		soundFFT->insert("windowingFunktion", "hann");
+		soundFFT->insert("windowingFunction", "hann");
 		break;
 	}
 	case 2: {
-		soundFFT->insert("windowingFunktion", "rect");
+		soundFFT->insert("windowingFunction", "rect");
 		break;
 	}
 	default:
-		soundFFT->insert("windowingFunktion", "rect");
+		soundFFT->insert("windowingFunction", "rect");
 		break;
 	}
 
@@ -133,7 +133,7 @@ void Config::readConfig() {
     s = *table->get_qualified_as<std::string>("soundSimulate.soundFile");
     m_soundFile = QString(s.c_str());
     m_fftSize = *table->get_qualified_as<int64_t>("soundFFT.fftSize");
-    s = *table->get_qualified_as<std::string>("soundFFT.windowingFunktion");
+    s = *table->get_qualified_as<std::string>("soundFFT.windowingFunction");
     QString t(s.c_str());
 
     if(t == "hamm")
