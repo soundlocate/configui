@@ -1,28 +1,23 @@
-[general]
-samplerate = 192000
-real = false
-log = false
-micPositions = [0,0,0
-                ,0,0,0
-                ,0,0,0
-                ,0,0,0]
-
-[soundInput]
-deviceName = "pulse"
-
 [soundSimulate]
-soundFile = "sine.wav"
-
+	soundFile = ""
 [soundFFT]
-fftSize = 192000
-windowingFunktion = "hann"
-fftPerSec = 10
-
-[soundLocate]
-algorithms = "PhaseOnly"
-accuracy = 0.01
-
+	fftPerSec = 10
+	windowingFunction = "hamm"
+	threshold = 0.000100000
+	fftSize = 96000
+[general]
+	log = false
+	real = false
+	micPositions = [0.460071, 0.797105, 0.819472, 0.213373, 0.934643, 0.937859, 0.559326, 0.763202, 0.563575, 0.184764, 0.440092, 0.0821636, 0.381054, 0.116343, 0.339780, 0.556408, 0.0403702, 0.806286, 0.0786738, 0.161174, 0.0314684, 0.788875, 0.960126, 0.867915, 0.353469, 0.505168, 0.535745, 0.0483092, 0.894130, 0.766346, 0.120875, 0.423776, 0.573912, 0.865368, 0.0325792, 0.469459, 0.649194, 0.844031, 0.999850, 0.823243, 0.437381, 0.0797825, 0.704588, 0.173234, 0.126023, 0.795096, 0.951904, 0.301208]
+	samplerate = 192000
 [soundReduce]
-maxClusterSize = 0.5
-maxKeep = 10
-meanWindow = 3
+	keepTime = 0.500000
+	maxKeep = 10
+	meanWindow = 3
+	maxClusterSize = 0.500000
+[soundInput]
+	deviceName = "pulse"
+[soundLocate]
+	algorithms = "PhaseOnly"
+	accuracy = 0.0100000
+

@@ -22,7 +22,7 @@ void LogText::start() {
 
 void LogText::stop(bool restart) {
     this->restart = restart;
-    p.kill();
+    p.terminate();
     m_logText += "</table>";
     emit logTextChanged();
 }
