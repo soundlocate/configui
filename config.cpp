@@ -98,6 +98,20 @@ void Config::writeConfig() {
     soundReduce->insert("meanWindow", (long) m_meanWindow);
 	soundReduce->insert("keepTime", m_keepTime);
 
+	switch (m_disFunc) {
+	case 0: {
+		soundFFT->insert("dissimilarityFunction", "meanDist");
+		break;
+	}
+	case 1: {
+		soundFFT->insert("dissimilarityFunction", "meanDirection");
+		break;
+	}
+	default:
+		soundFFT->insert("dissimilarityFunction", "meanDirection");
+		break;
+	}
+
 	table->insert("soundReduce", soundReduce);
 
     std::ofstream file{"config.toml"};
@@ -166,4 +180,14 @@ void Config::readConfig() {
     m_maxKeep = *table->get_qualified_as<int64_t>("soundReduce.maxKeep");
     m_meanWindow = *table->get_qualified_as<int64_t>("soundReduce.meanWindow");
     m_keepTime = *table->get_qualified_as<double>("soundReduce.keepTime");
+
+	s = *table->get_qualified_as<std::string>("soundReduce.dissimilarityFunction");
+    QString t(s.c_str());
+
+    if(t == "meanDist")
+        m_fftFunction = 0;
+    else if(t == "meanDirection")
+        m_fftFunction = 1;
+    else
+        m_fftFunction = 0;
 }

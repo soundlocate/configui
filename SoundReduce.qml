@@ -19,6 +19,23 @@ Item {
             verticalItemAlignment: Grid.AlignVCenter
 
             Label {
+                id: textFFTSize1
+                text: qsTr("windowing function")
+                font.pixelSize: 12
+            }
+
+            ComboBox {
+                id: comboBox1
+                width: 200
+                currentIndex: config.disFunc
+                model: [ "Distance", "Direction" ]
+
+                Component.onCompleted: {
+                    config.disFunc = Qt.binding(function() { return currentIndex })
+                }
+            }
+
+            Label {
                 id: textMaxClusterSize
                 text: qsTr("maximum size of a cluster")
             }
