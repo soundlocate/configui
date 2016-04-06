@@ -124,7 +124,7 @@ Item {
 
                 itemDelegate: TextInput {
                     text: styleData.value
-                    validator: DoubleValidator{bottom: 0; top: 1000000000;}
+                    validator: DoubleValidator{bottom: -100000000; top: 1000000000;}
 
                     onEditingFinished: {
                         var a = styleData.row

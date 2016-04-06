@@ -100,15 +100,15 @@ void Config::writeConfig() {
 
 	switch (m_disFunc) {
 	case 0: {
-		soundFFT->insert("dissimilarityFunction", "meanDist");
+		soundReduce->insert("dissimilarityFunction", "meanDist");
 		break;
 	}
 	case 1: {
-		soundFFT->insert("dissimilarityFunction", "meanDirection");
+	  soundReduce->insert("dissimilarityFunction", "meanDirection");
 		break;
 	}
 	default:
-		soundFFT->insert("dissimilarityFunction", "meanDirection");
+		soundReduce->insert("dissimilarityFunction", "meanDirection");
 		break;
 	}
 
@@ -182,7 +182,7 @@ void Config::readConfig() {
     m_keepTime = *table->get_qualified_as<double>("soundReduce.keepTime");
 
 	s = *table->get_qualified_as<std::string>("soundReduce.dissimilarityFunction");
-    QString t(s.c_str());
+    t = QString(s.c_str());
 
     if(t == "meanDist")
         m_fftFunction = 0;

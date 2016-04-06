@@ -1,0 +1,3 @@
+[submodule "bin"]
+	path = bin
+	url = https://bitbucket.org/sfn_pcode/soundbin
