@@ -1,24 +1,27 @@
+[soundReduce]
+	dissimilarityFunction = "meanDirection"
+	maxClusterSize = 0.00000
+	meanWindow = 1
+	maxKeep = 10
+	keepTime = 1.00000
 [general]
 	log = false
 	real = true
-	micPositions = [0.00000, 0.00000, 0.00000, 0.165000, 0.00000, 0.00000, 0.00000, 0.165000, 0.00000, 0.165000, 0.165000, 0.00000, 0.00000, 0.00000, 0.165000, 0.165000, 0.00000, 0.165000, 0.00000, 0.165000, 0.165000, 0.165000, 0.165000, 0.165000]
-	samplerate = 192000
-[soundReduce]
-	dissimilarityFunction = "meanDirection"
-	maxClusterSize = 0.200000
-	meanWindow = 1
-	maxKeep = 20
-	keepTime = 1.00000
-[soundInput]
-	deviceName = "pulse"
+	micPositions = [0.00000, 0.00000, 0.100000, 0.00000, 0.00000, 0.00000, 0.100000, 0.00000, 0.00000, 0.100000, 0.00000, 0.100000, 0.100000, 0.100000, 0.100000, 0.100000, 0.100000, 0.00000, 0.00000, 0.100000, 0.00000, 0.00000, 0.100000, 0.100000]
+	samplerate = 32768
 [soundLocate]
 	algorithms = "PhaseOnly"
 	accuracy = 0.0100000
-[soundFFT]
-	fftPerSec = 10
-	windowingFunction = "hamm"
-	threshold = 0.0100000
-	fftSize = 192000
+[soundInput]
+	deviceName = "pulse"
+	fpga = true
+	ip = "10.0.16.2"
+	port = "8080"
 [soundSimulate]
 	soundFile = ""
+[soundFFT]
+	fftPerSec = 10
+	windowingFunction = "hann"
+	threshold = 0.0100000
+	fftSize = 32768
 
