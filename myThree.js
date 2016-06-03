@@ -1,5 +1,5 @@
 function initScene() {
-    var WIDTH = window.innerWidth,
+    var WIDTH = window.innerWidth, 
         HEIGHT = window.innerHeight;
 
     camera = new THREE.PerspectiveCamera(.7, WIDTH / HEIGHT, 1, 500);
@@ -10,31 +10,6 @@ function initScene() {
     
     lut = new THREE.Lut('rainbow', 1024);
     lut.setMax( 1000 );
-    lut.setMin( 0 );
-
-    //scene.fog = new THREE.Fog(0x111111, 150, 200);
-    //root = new THREE.Object3D();
-
-    //add outline cube, TODO: changeme to sth. better
-//    var geometryCube = cube(50);
-//    geometryCube.computeLineDistances();
-//    var object = new THREE.LineSegments(geometryCube, new THREE.LineDashedMaterial({
-//        color: 0xffaa00,
-//        dashSize: 3,
-//        gapSize: 1,
-//        linewidth: 2
-//    }));
-//    scene.add(object);
-
-    //adding locator, TODO: rotate me right
-//    locator = new THREE.Mesh(new THREE.TetrahedronGeometry(10, 0), new THREE.MeshBasicMaterial({
-//        wireframe: true
-//    }));
-//    locator.rotation.x = 360 / 2;
-//    locator.position.set(0, 0, 0);
-//    locator.rotation.x = 360 / 2;
-//    locator.rotation.y = 360 / 2;
-//    scene.add(locator);
     
     //add loactor
     var geometryCube = loc();
@@ -42,10 +17,18 @@ function initScene() {
     var object = new THREE.LineSegments(geometryCube, new THREE.LineDashedMaterial({
         color: 0xffffff,
         dashSize: .005,
-        gapSize: .003,
-        linewidth: 100
+        gapSize: .005,
+        linewidth: 5
     }));
     scene.add(object);
+
+    var geometry = new THREE.SphereGeometry( 0.01, 32, 32 );
+    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var sphere = new THREE.Mesh( geometry, material );
+    var pos = -1 * size / 2;
+    sphere.position.set(pos, pos, pos);
+    console.log(sphere);
+    scene.add(sphere);
 
     
     /*var legend = lut.setLegendOn({'layout': 'vertical', position': { 'x': 1, 'y': 0, 'z': 0 }, 'dimensions': {'width': .1, 'height': .5}} );
@@ -61,11 +44,11 @@ function initScene() {
     }*/
     
 
-    renderer = new THREE.SoftwareRenderer({
-//        antialias: true
+    renderer = new THREE.WebGLRenderer({
+        antialias: true
     });
     renderer.setClearColor(0x111111);
-//    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(WIDTH, HEIGHT);
 
     var container = document.getElementById('container');
@@ -139,15 +122,23 @@ function spawnBall(color, size, position) {
 }
 
 var arrowMap = new Map(); //the map with the arrows inside
-function spawnArrow(freq, x, y, z) {    
+function spawnArrow(freq, x, y, z, amplitude) {
     var sourcePos = new THREE.Vector3(0, 0, 0);
-    var targetPos = new THREE.Vector3(x - 0.080829, z - 0.0571548, y - 0.14);
-    
-    console.log(targetPos);
-    
+
+
+    //var targetPos = new THREE.Vector3(y - size / 2, z - size / 2, x - size / 2);
+    var targetPos = new THREE.Vector3(y,z,x);
+
     var direction = new THREE.Vector3().subVectors(targetPos, sourcePos);
-    var arrow = new THREE.ArrowHelper(direction.clone().normalize(), sourcePos, .3, lut.getColor(freq));
-    
+
+    var color = lut.getColor(freq);
+
+    color.r *= amplitude * 20;
+    color.g *= amplitude * 20;
+    color.b *= amplitude * 20;
+
+    var arrow = new THREE.ArrowHelper(direction.clone().normalize(), sourcePos, .3, color);
+
     scene.add(arrow);
     if(arrowMap.get(freq) != undefined) {
         scene.remove(arrowMap.get(freq).handle);
@@ -156,10 +147,10 @@ function spawnArrow(freq, x, y, z) {
 }
 
 function crawlMap() {
-    for (var key in arrowMap) {
-      if(arrowMap[key].time + 1000 <= new Date().getTime()) {
-          scene.remove(arrowMap[key].handle);
+    for (var [key, value] of arrowMap) {
+      if(value.time + 300 <= new Date().getTime()) {
+          scene.remove(value.handle);
           arrowMap.delete(key);
       }
     }
-}u
+}

@@ -1,8 +1,8 @@
 [soundReduce]
 	dissimilarityFunction = "meanDirection"
-	maxClusterSize = 0.10000
-	meanWindow = 2
-	maxKeep = 10 
+	maxClusterSize = 0.030000
+	meanWindow = 3
+	maxKeep = 9 
 	keepTime = 1.00000
 [general]
 	log = false
@@ -16,13 +16,13 @@
 [soundInput]
 	deviceName = "pulse"
 	fpga = true
-	ip = "192.168.1.2"
+	ip = "192.168.0.3"
 	port = "8080"
 [soundSimulate]
 	soundFile = ""
 [soundFFT]
 	fftPerSec = 10
 	windowingFunction = "hamm"
-	threshold = 0.0200000
+	threshold = 0.0300000
 	fftSize = 32768
 
